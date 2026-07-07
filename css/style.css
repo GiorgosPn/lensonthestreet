@@ -50,7 +50,7 @@ a { color: inherit; }
   line-height: 0.96;
   margin: 0;
 }
-.wordmark { font-size: clamp(2.9rem, 11vw, 12.5rem); text-align: center; white-space: nowrap; }
+.wordmark{ width:100%; font-size:clamp(2rem,9vw,9rem); line-height:.92; white-space:nowrap;}
 .h1 { font-size: clamp(2.3rem, 5.5vw, 4.6rem); }
 .h2 { font-size: clamp(1.5rem, 3.2vw, 2.4rem); }
 .eyebrow {
