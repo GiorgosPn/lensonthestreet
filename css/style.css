@@ -37,7 +37,7 @@ a { color: inherit; }
 .wrap { max-width: var(--wrap); margin: 0 auto; padding-left: var(--pad); padding-right: var(--pad); }
 .visually-hidden {
   position: absolute; width: 1px; height: 1px;
-  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: normal;
 }
 
 /* ------------------------------------------------------------ type */
@@ -50,7 +50,7 @@ a { color: inherit; }
   line-height: 0.96;
   margin: 0;
 }
-.wordmark{ width:100%; font-size:clamp(2rem,9vw,9rem); line-height:.92; white-space:nowrap;}
+.wordmark{ width:100%; font-size:clamp(2rem,9vw,9rem); line-height:.92; white-space:normal;}
 .h1 { font-size: clamp(2.3rem, 5.5vw, 4.6rem); }
 .h2 { font-size: clamp(1.5rem, 3.2vw, 2.4rem); }
 .eyebrow {
@@ -135,7 +135,7 @@ a { color: inherit; }
 /* -------------------------------------------------------- marquee */
 .marquee {
   border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
-  overflow: hidden; white-space: nowrap;
+  overflow: hidden; white-space: normal;
   padding: 14px 0; user-select: none;
 }
 .marquee-track {
@@ -299,7 +299,7 @@ a { color: inherit; }
 .footer-wordmark {
   font-size: clamp(2rem, 7.4vw, 8.2rem);
   padding: clamp(50px, 7vw, 96px) 12px clamp(26px, 4vw, 44px);
-  white-space: nowrap; text-align: center;
+  white-space: normal; text-align: center;
 }
 .footer-meta {
   display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap;
