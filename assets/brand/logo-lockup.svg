@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 440 76" fill="none">
+  <g stroke="#171512" stroke-width="2.2" stroke-linecap="round" transform="translate(2,4) scale(0.95)">
+  <circle cx="34" cy="34" r="30"/>
+  <line x1="34.00" y1="5.20" x2="48.37" y2="39.81"/>
+  <line x1="58.94" y1="19.60" x2="36.16" y2="49.35"/>
+  <line x1="58.94" y1="48.40" x2="21.79" y2="43.54"/>
+  <line x1="34.00" y1="62.80" x2="19.63" y2="28.19"/>
+  <line x1="9.06" y1="48.40" x2="31.84" y2="18.65"/>
+  <line x1="9.06" y1="19.60" x2="46.21" y2="24.46"/>
+  </g>
+  <text x="86" y="42" font-family="Cormorant Garamond, Georgia, serif" font-size="33" fill="#171512">Lens on the <tspan font-style="italic">Street</tspan></text>
+  <text x="88" y="64" font-family="IBM Plex Mono, monospace" font-size="10" letter-spacing="3.4" fill="#7a766c">GIORGOS PANAGOU · PHOTOGRAPHY</text>
+</svg>
