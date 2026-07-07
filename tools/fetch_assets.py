@@ -1,24 +1,22 @@
 #!/usr/bin/env python3
 """
-fetch_assets.py — τρέξε το ΤΟΠΙΚΑ (στο laptop σου), όσο το lensonthestreet.com
-είναι ακόμα live στο Squarespace.
+fetch_assets.py — τρέξε το ΤΟΠΙΚΑ, όσο το lensonthestreet.com είναι live.
 
-Τι κάνει:
-  1. Σκανάρει τις live σελίδες σου και μαζεύει όλα τα image URLs
-     (images.squarespace-cdn.com) μαζί με captions/alt.
-  2. Κατεβάζει τα originals (format=2500w) σε assets/img/<page>/.
-  3. Ξαναγράφει κάθε CDN URL στα τοπικά .html ώστε να δείχνει στο τοπικό αρχείο.
-  4. Γεμίζει αυτόματα τα κενά project galleries (unfaced, penumbra, faced,
-     saltwatercolors, muse) ανάμεσα στα GALLERY:START/END markers, ενημερώνει
-     το "NN photographs" counter και βάζει covers στα project cards
-     (index.html + portfolio.html).
+1. Σκανάρει τις live σελίδες σου (home, about, prints, portfolio + 6 series)
+   και μαζεύει όλα τα image URLs (images.squarespace-cdn.com) + captions/alt.
+2. Κατεβάζει τα originals σε assets/img/<page>/ (κάνει skip όσα υπάρχουν ήδη —
+   αν έχεις ήδη τρέξει την προηγούμενη έκδοση, τα αρχεία επαναχρησιμοποιούνται).
+3. Ξαναγράφει κάθε CDN URL στα τοπικά .html σε τοπικό path.
+4. Γεμίζει τα κενά galleries (unfaced, penumbra, faced, saltwatercolors, muse)
+   ανάμεσα στα GALLERY:START/END markers, με captions.
+5. Ενημερώνει τα "NN frames" counters, τα covers (data-cover) και τα
+   previews των series (data-preview) με το πρώτο καρέ κάθε series.
 
 Χρήση (από το root του project):
   pip install requests beautifulsoup4
   python tools/fetch_assets.py
 
-Τρέξε το ΠΡΙΝ ακυρώσεις τη συνδρομή Squarespace — μετά τη λήξη, τα CDN links
-σταματούν να δουλεύουν.
+Τρέξε το ΠΡΙΝ την ακύρωση του Squarespace — μετά, τα CDN links πεθαίνουν.
 """
 import re
 import sys
@@ -101,7 +99,7 @@ def main():
             url_map[src.split("?")[0]] = rel
             page_images[key].append((rel, cap))
 
-    # rewrite CDN urls -> local paths σε όλα τα html
+    # 3 — rewrite CDN urls -> local paths σε όλα τα html
     html_files = list(ROOT.glob("*.html")) + list((ROOT / "portfolio").glob("*.html"))
     for hf in html_files:
         text = hf.read_text(encoding="utf-8")
@@ -116,26 +114,25 @@ def main():
             hf.write_text(new, encoding="utf-8")
             print(f"rewrote {hf.relative_to(ROOT)}")
 
-    # γέμισε τα κενά galleries + counters
+    # 4+5 — galleries, counters, covers, previews
     for slug in PROJECTS:
-        hf = ROOT / "portfolio" / f"{slug}.html"
         imgs = page_images.get(slug) or []
-        if not hf.exists() or not imgs:
+        if not imgs:
             continue
-        text = hf.read_text(encoding="utf-8")
-        start, end = f"<!-- GALLERY:START:{slug} -->", f"<!-- GALLERY:END:{slug} -->"
-        if start in text and "fetch_assets.py" in text.split(start)[1].split(end)[0]:
-            figs = "\n".join(
-                f'''        <figure class="p-item reveal">
+        hf = ROOT / "portfolio" / f"{slug}.html"
+        if hf.exists():
+            text = hf.read_text(encoding="utf-8")
+            start, end = f"<!-- GALLERY:START:{slug} -->", f"<!-- GALLERY:END:{slug} -->"
+            if start in text and "fetch_assets.py" in text.split(start)[1].split(end)[0]:
+                figs = "\n".join(f'''        <figure class="p-item reveal">
           <img src="../{rel}" alt="{cap}" loading="lazy">
           <figcaption>{cap}</figcaption>
         </figure>''' for rel, cap in imgs)
-            text = text.split(start)[0] + start + "\n" + figs + "\n        " + end + text.split(end)[1]
-        text = re.sub(rf'(data-count="{slug}">)[^<]*', rf"\g<1>{len(imgs):02d} photographs", text)
-        hf.write_text(text, encoding="utf-8")
-        print(f"filled gallery: portfolio/{slug}.html ({len(imgs)} photos)")
+                text = text.split(start)[0] + start + "\n" + figs + "\n        " + end + text.split(end)[1]
+            text = re.sub(rf'(data-count="{slug}"[^>]*>)[^<]*', rf"\g<1>{len(imgs):02d} frames", text)
+            hf.write_text(text, encoding="utf-8")
+            print(f"filled gallery: portfolio/{slug}.html ({len(imgs)} frames)")
 
-    # covers + meta στα project cards (index.html & portfolio.html)
     for page_name in ("index.html", "portfolio.html"):
         pf = ROOT / page_name
         if not pf.exists():
@@ -145,14 +142,14 @@ def main():
             imgs = page_images.get(slug) or []
             if not imgs:
                 continue
-            cover, cap = imgs[0]
-            pat = rf'(<div class="project-cover" data-slug="{slug}">(?:<span class="project-idx">\d+</span>)?)(?:<img[^>]*>)?(</div>)'
-            text = re.sub(pat, rf'\g<1><img src="{cover}" alt="{cap}" loading="lazy">\g<2>', text)
-            text = re.sub(rf'(data-slug-meta="{slug}">)[^<]*', rf"\g<1>{len(imgs):02d} photographs", text)
+            first = imgs[0][0]
+            text = re.sub(rf'(data-slug="{slug}" data-preview=")[^"]*', rf"\g<1>{first}", text)
+            text = re.sub(rf'(data-cover="{slug}" src=")[^"]*', rf"\g<1>{first}", text)
+            text = re.sub(rf'(data-count="{slug}"[^>]*>)[^<]*', rf"\g<1>{len(imgs):02d} frames", text)
         pf.write_text(text, encoding="utf-8")
-        print(f"covers set in {page_name}")
+        print(f"updated previews/covers/counters in {page_name}")
 
-    print("\nΈτοιμο. Δοκίμασε τοπικά:  python -m http.server 8000  →  http://localhost:8000")
+    print("\nΈτοιμο. Έλεγχος:  python -m http.server 8000  →  http://localhost:8000")
 
 
 if __name__ == "__main__":
