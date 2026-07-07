@@ -359,3 +359,50 @@ a:focus-visible, button:focus-visible, input:focus-visible {
   .reveal, .js .wordmark.animate .ch { opacity: 1; transform: none; }
   .marquee-track { animation: none !important; }
 }
+
+/* =========================================
+   HERO WORDMARK - MINIMAL PHOTO PORTFOLIO
+   ========================================= */
+
+.hero {
+  overflow: hidden;
+}
+
+.hero .wordmark {
+  font-size: clamp(2.8rem, 6vw, 6rem);
+  line-height: 0.92;
+  letter-spacing: -0.055em;
+  font-weight: 700;
+  text-transform: uppercase;
+  text-align: center;
+  white-space: nowrap;
+  width: 100%;
+  margin: 0 auto;
+}
+
+/* Keep title elegant on large screens */
+@media (min-width: 1200px) {
+  .hero .wordmark {
+    font-size: 6.2rem;
+    letter-spacing: -0.065em;
+  }
+}
+
+/* Tablet */
+@media (max-width: 900px) {
+  .hero .wordmark {
+    font-size: clamp(2.5rem, 8vw, 4.5rem);
+    letter-spacing: -0.05em;
+  }
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  .hero .wordmark {
+    font-size: 2.4rem;
+    letter-spacing: -0.045em;
+    white-space: normal;
+    line-height: 0.95;
+    padding: 0 15px;
+  }
+}
