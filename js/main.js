@@ -205,4 +205,21 @@
       toggle.setAttribute("aria-expanded", String(open));
     });
   }
+
+  /* 11 ─ theme toggle (light / dark, remembered) */
+  const themeBtn = document.querySelector("[data-theme-toggle]");
+  if (themeBtn) {
+    const root = document.documentElement;
+    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    const current = () => {
+      const set = root.getAttribute("data-theme");
+      if (set) return set;
+      return prefersDark ? "dark" : "light";
+    };
+    themeBtn.addEventListener("click", () => {
+      const next = current() === "dark" ? "light" : "dark";
+      root.setAttribute("data-theme", next);
+      try { localStorage.setItem("lots-theme", next); } catch (e) {}
+    });
+  }
 })();

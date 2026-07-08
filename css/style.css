@@ -23,6 +23,31 @@
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
+/* ---- Dark "gallery" theme: warm charcoal, gold lifted for contrast ---- */
+:root[data-theme="dark"] {
+  --paper: #14130f;              /* deep warm charcoal (matches neg band) */
+  --panel: #1c1a15;              /* raised section background             */
+  --ink: #e9e6dd;                /* warm off-white text                   */
+  --mist: #8f8a7d;               /* muted label grey                      */
+  --line: #2b2923;              /* hairlines                             */
+  --gilt: #c2a355;               /* gold lifted so it glows on dark       */
+  --neg: #0d0c09;                /* strip band goes darker still          */
+  --neg-text: #e9e6dd;
+  --neg-line: #2b2923;
+}
+/* respect OS preference on first visit (before JS sets an explicit choice) */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #14130f; --panel: #1c1a15; --ink: #e9e6dd; --mist: #8f8a7d;
+    --line: #2b2923; --gilt: #c2a355; --neg: #0d0c09;
+  }
+}
+html { transition: none; }
+body, .panel, header, .marquee, .archive, .strip-section {
+  transition: background-color 0.5s var(--ease), color 0.5s var(--ease),
+              border-color 0.5s var(--ease);
+}
+
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
 body {
@@ -380,4 +405,21 @@ a:focus-visible, button:focus-visible, input:focus-visible, summary:focus-visibl
   .reveal, .js .hero-title.animate .wd { opacity: 1; transform: none; }
   .grain { display: none; }
   .loader { display: none !important; }
+}
+
+/* -------------------------------------------- THEME TOGGLE (sun / moon) */
+.theme-toggle {
+  background: none; border: 0; padding: 6px; margin: 0 2px; cursor: pointer;
+  color: var(--mist); display: inline-flex; align-items: center;
+  border-radius: 50%; transition: color 0.3s var(--ease), transform 0.5s var(--ease);
+}
+.theme-toggle:hover { color: var(--gilt); transform: rotate(25deg); }
+.theme-toggle .ic-moon { display: none; }
+.theme-toggle .ic-sun { display: block; }
+/* dark active -> show sun (to go back to light), hide moon */
+:root[data-theme="dark"] .theme-toggle .ic-sun { display: none; }
+:root[data-theme="dark"] .theme-toggle .ic-moon { display: block; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .theme-toggle .ic-sun { display: none; }
+  :root:not([data-theme="light"]) .theme-toggle .ic-moon { display: block; }
 }
