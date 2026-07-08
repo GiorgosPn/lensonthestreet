@@ -35,7 +35,7 @@
   if (clock) {
     const draw = () => {
       const t = new Date().toLocaleTimeString("en-GB", { timeZone: "Europe/Athens", hour12: false });
-      clock.textContent = `ATHENS — ${t}`;
+      clock.textContent = `ATHENS · ${t}`;
     };
     draw(); setInterval(draw, 1000);
   }
@@ -92,7 +92,7 @@
         stripSection.style.height = "";
         track.style.transform = "";
         const hint = document.querySelector("[data-strip-hint]");
-        if (hint) hint.textContent = "Swipe — the film advances";
+        if (hint) hint.textContent = "Swipe. The film advances";
         active = false; return;
       }
       stripSection.classList.remove("strip-native");
@@ -207,8 +207,8 @@
   }
 
   /* 11 ─ theme toggle (light / dark, remembered) */
-  const themeBtn = document.querySelector("[data-theme-toggle]");
-  if (themeBtn) {
+  const themeBtns = document.querySelectorAll("[data-theme-toggle]");
+  if (themeBtns.length) {
     const root = document.documentElement;
     const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
     const current = () => {
@@ -216,10 +216,10 @@
       if (set) return set;
       return prefersDark ? "dark" : "light";
     };
-    themeBtn.addEventListener("click", () => {
+    themeBtns.forEach((btn) => btn.addEventListener("click", () => {
       const next = current() === "dark" ? "light" : "dark";
       root.setAttribute("data-theme", next);
       try { localStorage.setItem("lots-theme", next); } catch (e) {}
-    });
+    }));
   }
 })();
