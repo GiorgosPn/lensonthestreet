@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <script>(function(){try{var t=localStorage.getItem("lots-theme");if(t)document.documentElement.setAttribute("data-theme",t);}catch(e){}})();</script>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>About — Lens on the Street</title>
@@ -53,6 +54,7 @@
           <a href="https://instagram.com/lensonthestreetcollective" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="3.8"/><circle cx="16.9" cy="7.1" r="1" fill="currentColor" stroke="none"/></svg></a>
           <a href="https://tiktok.com/@lensonthestreet" target="_blank" rel="noopener" aria-label="TikTok"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M16.5 3c.3 1.9 1.6 3.4 3.5 3.7v3c-1.4 0-2.6-.4-3.7-1.1v6.2c0 3.4-2.6 6.2-6 6.2s-6-2.5-6-5.8c0-3.2 2.5-5.8 5.7-5.9.3 0 .6 0 .9.1v3.1a2.9 2.9 0 0 0-3.5 2.8c0 1.6 1.3 2.8 2.9 2.8s2.9-1.3 2.9-2.9V3h3.3z"/></svg></a>
         </div>
+        <button class="theme-toggle" data-theme-toggle aria-label="Toggle dark mode" title="Toggle theme"><svg class="ic-sun" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5 5l1.4 1.4M17.6 17.6L19 19M19 5l-1.4 1.4M6.4 17.6L5 19"/></svg><svg class="ic-moon" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M20 14.5A8 8 0 0 1 9.5 4a7 7 0 1 0 10.5 10.5z"/></svg></button>
         <span class="clock mono dim" data-clock></span>
       </nav>
     </div>
@@ -94,9 +96,10 @@
       <p class="subscribe-sub">Sign up with your email address to receive news and exclusive prints.</p>
       <!-- TODO: σύνδεσε τη φόρμα με τον provider σου, π.χ. Buttondown:
            action="https://buttondown.com/api/emails/embed-subscribe/USERNAME" method="post" -->
-      <form class="subscribe-form" action="#" method="post">
+      <form class="subscribe-form" action="https://buttondown.com/api/emails/embed-subscribe/YOUR-USERNAME" method="post">
         <label class="visually-hidden" for="sub-email">Email address</label>
         <input id="sub-email" type="email" name="email" placeholder="EMAIL ADDRESS" required>
+        <input type="hidden" name="embed" value="1">
         <button type="submit">Sign up</button>
       </form>
     </div>
