@@ -153,7 +153,7 @@
     const bImg = box.querySelector("img");
     const bCap = box.querySelector("figcaption");
     const bCnt = box.querySelector(".lightbox-counter");
-    const items = [...document.querySelectorAll(".a-item img, .frame img, .p-item img")];
+    const items = [...document.querySelectorAll(".frame img, .p-item img")];
     let cur = -1;
     const pad = (n) => String(n).padStart(2, "0");
     const show = (i) => {
@@ -190,7 +190,7 @@
       cursor.style.left = `${cx}px`; cursor.style.top = `${cy}px`;
       requestAnimationFrame(follow);
     })();
-    document.querySelectorAll("a, button, summary, .a-item, .frame, .p-item").forEach((el) => {
+    document.querySelectorAll("a, button, summary, .frame, .p-item").forEach((el) => {
       el.addEventListener("mouseenter", () => cursor.classList.add("grow"));
       el.addEventListener("mouseleave", () => cursor.classList.remove("grow"));
     });

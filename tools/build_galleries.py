@@ -17,7 +17,6 @@ build_galleries.py — τρέχει σε ΚΑΘΕ deploy (Cloudflare Pages build
 
 Φάκελοι:
   assets/<series>/   -> gallery της αντίστοιχης portfolio/<series>.html
-  assets/archive/    -> το "Archive" (contact sheet) στην αρχική
   assets/strip/      -> το negative strip ("Selected frames"), auto FR 01, FR 02...
 
 Ρίχνεις εικόνες -> commit -> push. Το Cloudflare τρέχει αυτό στο build.
@@ -105,18 +104,6 @@ def figures_gallery(series, items):
     return "\n".join(out)
 
 
-def figures_archive(items):
-    out = []
-    for name, title in items:
-        t = htmllib.escape(title, quote=True)
-        out.append(
-            '        <figure class="a-item reveal">'
-            f'<img src="assets/archive/{name}" alt="{t}" loading="lazy">'
-            f'<figcaption>{htmllib.escape(title)}</figcaption></figure>'
-        )
-    return "\n".join(out)
-
-
 def figures_strip(items):
     out = []
     for i, (name, title) in enumerate(items, start=1):
@@ -194,10 +181,7 @@ def main():
     idx = ROOT / "index.html"
     if idx.exists():
         text = idx.read_text(encoding="utf-8")
-        arch = list_dir("archive")
         strip = list_dir("strip")
-        text, aok = replace_between(text, "<!-- ARCHIVE:START -->", "<!-- ARCHIVE:END -->",
-                                    figures_archive(arch), "        ")
         text, sok = replace_between(text, "<!-- STRIP:START -->", "<!-- STRIP:END -->",
                                     figures_strip(strip), "          ")
 
@@ -216,7 +200,6 @@ def main():
                           text, count=1)
 
         idx.write_text(text, encoding="utf-8")
-        print(f"archive: {len(arch):2d} frames  [{'✓' if aok else 'no markers'}]")
         print(f"strip:   {len(strip):2d} frames  [{'✓' if sok else 'no markers'}]")
         if hero:
             print(f"hero:    {hero[0][0]} -> hero + og:image")
