@@ -21,6 +21,7 @@
   --font-body: "Instrument Sans", "Helvetica Neue", sans-serif;
   --pad: clamp(20px, 4vw, 52px);
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --header-bg: rgba(250,249,246,0.92);   /* light: translucent paper */
 }
 
 /* ---- Dark "gallery" theme: warm charcoal, gold lifted for contrast ---- */
@@ -34,12 +35,13 @@
   --neg: #0d0c09;                /* strip band goes darker still          */
   --neg-text: #e9e6dd;
   --neg-line: #2b2923;
+  --header-bg: rgba(20,19,15,0.92);   /* dark: translucent charcoal */
 }
 /* respect OS preference on first visit (before JS sets an explicit choice) */
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
     --paper: #14130f; --panel: #1c1a15; --ink: #e9e6dd; --mist: #8f8a7d;
-    --line: #2b2923; --gilt: #c2a355; --neg: #0d0c09;
+    --line: #2b2923; --gilt: #c2a355; --neg: #0d0c09; --header-bg: rgba(20,19,15,0.92);
   }
 }
 html { transition: none; }
@@ -105,7 +107,7 @@ a { color: inherit; }
 /* ----------------------------------------------------------- header */
 .site-header {
   position: sticky; top: 0; z-index: 80;
-  background: rgba(250,249,246,0.92); backdrop-filter: blur(8px);
+  background: var(--header-bg); backdrop-filter: blur(8px);
   border-bottom: 1px solid var(--line);
   transition: transform 0.45s var(--ease);
 }
