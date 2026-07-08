@@ -9,7 +9,7 @@
   /* Το print που πουλάς. Άλλαξε τίτλο/τιμές/μεγέθη μόνο εδώ. */
   const PRINT = {
     title: "Walking Shadow",
-    email: "g.panagou94@gmail.com",
+    email: "lensonthestreet@gmail.com",
     paper: "Ilford Galerie Smooth Pearl 310",
     sizes: {
       a4: { label: "A4",      w: 21,   h: 29.7, price: 30  },
