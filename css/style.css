@@ -529,3 +529,66 @@ a:focus-visible, button:focus-visible, input:focus-visible, summary:focus-visibl
 .journal-entry h2 { font-family: var(--font-display); font-weight: 500; font-size: clamp(1.35rem, 2.4vw, 1.9rem); margin: 10px 0 0; }
 .journal-entry p { color: var(--mist); margin: 12px 0 0; max-width: 62ch; }
 .journal-entry .mono-link { margin-top: 14px; display: inline-block; }
+
+/* PRINT MEASUREMENTS + FULL IMAGE FIT */
+
+.print-measure-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+/* The actual print */
+.print-frame {
+  position: relative;
+  overflow: hidden;
+  margin: 0;
+  background: #fff;
+}
+
+
+.print-frame img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: contain;
+}
+
+
+/* Measurement labels */
+.print-dim {
+  position: absolute;
+  font-size: 10px;
+  letter-spacing: .12em;
+  opacity: .55;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+
+/* vertical height label */
+.print-dim--h {
+  right: -48px;
+  top: 50%;
+  transform: translateY(-50%) rotate(-90deg);
+}
+
+
+/* horizontal width label */
+.print-dim--w {
+  bottom: -28px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+
+/* subtle gallery style frame */
+.print-frame::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  box-shadow: inset 0 0 0 1px rgba(0,0,0,.08);
+}
