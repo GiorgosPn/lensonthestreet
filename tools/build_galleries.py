@@ -223,6 +223,21 @@ def main():
         else:
             print("hero:     (κενό assets/hero/ — αμετάβλητο)")
 
+    # 5 — about portrait από assets/about/ (πρώτη εικόνα)
+    about_pg = ROOT / "about.html"
+    about_imgs = list_dir("about")
+    if about_pg.exists() and about_imgs:
+        name, title = about_imgs[0]
+        src = f"assets/about/{name}"
+        alt = title or "Giorgos Panagou"
+        t = about_pg.read_text(encoding="utf-8")
+        t = re.sub(r'(<img data-cover="about" src=")[^"]*"',
+                   lambda m: f'{m.group(1)}{src}"', t, count=1)
+        about_pg.write_text(t, encoding="utf-8")
+        print(f"about:   {name} -> about portrait")
+    elif about_imgs is not None and not about_imgs:
+        print("about:    (κενό assets/about/ — αμετάβλητο)")
+
     total = sum(counts.values())
     print(f"\nΈτοιμο. {total} καρέ σε {len([c for c in counts.values() if c])} series.")
 
