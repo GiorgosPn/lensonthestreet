@@ -257,10 +257,10 @@ a { color: inherit; }
 @media (max-width: 860px) { .collections-grid { grid-template-columns: 1fr; } .col-stage { display: none; } }
 
 /* --------------------------------------------- portfolio grid page */
-.projects-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(16px, 2.4vw, 32px); padding: 0 var(--pad) clamp(48px, 7vw, 96px); }
+.projects-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(16px, 2.4vw, 32px); padding: 0 var(--pad) clamp(48px, 7vw, 96px); align-items: start; }
 @media (max-width: 900px) { .projects-grid { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 560px) { .projects-grid { grid-template-columns: 1fr; } }
-.project-card { text-decoration: none; display: block; }
+.project-card { text-decoration: none; display: flex; flex-direction: column; }
 .project-cover { aspect-ratio: 4 / 5; overflow: hidden; position: relative; background: var(--panel); }
 .project-cover img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.8s var(--ease); }
 .project-card:hover .project-cover img { transform: scale(1.04); }
