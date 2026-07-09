@@ -359,6 +359,29 @@ a { color: inherit; }
 }
 .footer-brandline .mark { width: 40px; height: 40px; color: var(--ink); }
 .footer-brandline .display { font-size: clamp(1.5rem, 3.6vw, 2.6rem); font-style: italic; }
+/* clickable footer logo → home, with a camera-shutter open/close on hover */
+a.footer-brandline { text-decoration: none; color: inherit; cursor: pointer; transition: color 0.3s var(--ease); }
+a.footer-brandline:hover { color: var(--gilt); }
+a.footer-brandline:hover .mark { color: var(--gilt); }
+.mark-shutter .mark-blades { transform-origin: 34px 34px; transition: transform 0.35s var(--ease); }
+.mark-shutter .mark-ring { transform-origin: 34px 34px; transition: transform 0.35s var(--ease); }
+/* το διάφραγμα "κλείνει" (blades μαζεύουν) και ξανανοίγει, σαν κλείστρο */
+a.footer-brandline:hover .mark-blades { animation: shutter-blades 0.7s var(--ease); }
+a.footer-brandline:hover .mark-ring { animation: shutter-ring 0.7s var(--ease); }
+@keyframes shutter-blades {
+  0%   { transform: scale(1); }
+  45%  { transform: scale(0.06); }   /* κλειστό διάφραγμα */
+  55%  { transform: scale(0.06); }
+  100% { transform: scale(1); }
+}
+@keyframes shutter-ring {
+  0%, 100% { transform: scale(1); }
+  45%, 55% { transform: scale(0.92); }
+}
+@media (prefers-reduced-motion: reduce) {
+  a.footer-brandline:hover .mark-blades,
+  a.footer-brandline:hover .mark-ring { animation: none; }
+}
 .footer-meta { display: flex; justify-content: space-between; gap: 14px; flex-wrap: wrap; padding: 16px var(--pad) 24px; border-top: 1px solid var(--line); }
 .footer-meta a { text-decoration: none; }
 .footer-meta a:hover { color: var(--gilt); }
@@ -572,13 +595,13 @@ a:focus-visible, button:focus-visible, input:focus-visible, summary:focus-visibl
   display: inline-block;
 }
 /* About: μεγάλη υπογραφή στο τέλος του κειμένου */
-.sig-about { font-size: clamp(3rem, 6vw, 4.8rem); margin-top: 0.2em; }
+.sig-about { font-size: clamp(3.2rem, 7vw, 5.2rem); margin-top: 0.2em; }
 .sig-about .sig-role {
   display: block; font-family: var(--font-mono); color: var(--mist);
   font-size: 10.5px; letter-spacing: 0.28em; text-transform: uppercase; margin-top: 0.2em;
 }
 /* Footer: μικρότερη υπογραφή δίπλα στο brand */
-.footer-signature { font-family: var(--font-signature); color: var(--gilt); font-size: 2.3rem; line-height: 0.7; }
+.footer-signature { font-family: var(--font-signature); color: var(--gilt); font-size: 2.6rem; line-height: 1; }
 
 /* animated "draw-in" όταν εμφανίζεται (μόνο αν δεν προτιμά reduced motion) */
 @media (prefers-reduced-motion: no-preference) {
