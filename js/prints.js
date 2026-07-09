@@ -24,11 +24,15 @@
 
   const stage   = document.querySelector(".print-stage");
   const wall    = document.querySelector(".print-wall");
+  const scene   = document.querySelector("[data-scene]");
   const chips   = [...document.querySelectorAll(".size-chip")];
   const priceEl = document.querySelector("[data-price]");
   const dimW    = document.querySelector("[data-dim-w]");
   const dimH    = document.querySelector("[data-dim-h]");
   const order   = document.querySelector("[data-order]");
+
+  /* Διαστάσεις σκηνής σε cm — ΠΡΕΠΕΙ να ταιριάζουν με το CSS/SVG viewBox */
+  const ROOM_W = 160, ROOM_H = 150;   /* πιο κοντινό, μεγαλύτερα έπιπλα */
 
   /* γέμισε τις τιμές πάνω στα chips από το PRINT object */
   chips.forEach((c) => {
@@ -37,11 +41,13 @@
     if (s && el) el.textContent = `€${s.price}`;
   });
 
-  /* px ανά cm: το μεγαλύτερο μέγεθος (60×90) πρέπει να χωράει άνετα */
+  /* px ανά cm: διαλέγεται ώστε ΟΛΟ το δωμάτιο (360×250cm) να χωράει στον
+     τοίχο. Κάδρο και έπιπλα κλιμακώνονται με το ίδιο --k, οπότε η αναλογία
+     κάδρου προς καναπέ είναι πάντα σωστή. */
   const pxPerCm = () => {
-    const availW = wall.clientWidth - 120;   /* χώρος για το πλαϊνό label */
-    const availH = wall.clientHeight - 120;  /* κορδόνι + δάπεδο          */
-    return Math.max(1.4, Math.min(availW / 60, availH / 90, 3.4));
+    const availW = wall.clientWidth  - 24;
+    const availH = wall.clientHeight - 12;
+    return Math.min(availW / ROOM_W, availH / ROOM_H);
   };
 
   const rollPrice = (from, to) => {
@@ -63,8 +69,9 @@
     const s = PRINT.sizes[key];
     currentKey = key;
     const k = pxPerCm();
-    frame.style.width = `${s.w * k}px`;
-    frame.style.height = `${s.h * k}px`;
+    scene.style.setProperty("--k", k);
+    scene.style.setProperty("--pw", s.w);
+    scene.style.setProperty("--ph", s.h);
     dimW.textContent = `${s.w} cm`;
     dimH.textContent = `${s.h} cm`;
     if (animate) rollPrice(prev.price, s.price); else priceEl.textContent = `€${s.price}`;
