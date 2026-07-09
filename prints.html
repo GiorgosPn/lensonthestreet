@@ -71,18 +71,26 @@
     <section class="print-shop">
       <div class="print-stage reveal" aria-label="Print size preview">
         <div class="print-wall">
-          <div class="print-hang">
-            <span class="print-cord" aria-hidden="true"></span>
-            <div class="print-frame-wrap">
-              <span class="print-dim print-dim--h mono" data-dim-h>42 cm</span>
-              <figure class="print-frame" data-frame>
-                <img src="assets/prints/demo.jpg" alt="Walking Shadow, fine art print by Giorgos Panagou"
-                     onerror="this.onerror=null;this.src='assets/print/demo.jpg'">
-              </figure>
-              <span class="print-dim print-dim--w mono" data-dim-w>29.7 cm</span>
+          <!-- Σκηνή σε κλίμακα: 1 SVG μονάδα = 1 cm. Τοίχος ~250cm.
+               Καναπής (200cm), λάμπα (155cm), φυτό (130cm) και κάδρο
+               μοιράζονται ΤΗΝ ΙΔΙΑ κλίμακα px/cm (το JS ορίζει --k). -->
+          <div class="print-scene" data-scene>
+            <svg class="scene-room" viewBox="0 0 160 150" preserveAspectRatio="xMidYMax meet" aria-hidden="true">
+              <line class="rm-skirt" x1="0" y1="150" x2="160" y2="150"/>
+            </svg>
+            <!-- κρεμαστό κάδρο: κέντρο στο eye-level ~145cm -->
+            <div class="print-hang" data-hang>
+              <span class="print-cord" aria-hidden="true"></span>
+              <div class="print-frame-wrap">
+                <span class="print-dim print-dim--h mono" data-dim-h>42 cm</span>
+                <figure class="print-frame" data-frame>
+                  <img src="assets/prints/demo.jpg" alt="Effortlessly Unbothered, fine art print by Giorgos Panagou"
+                       onerror="this.onerror=null;this.src='assets/print/demo.jpg'">
+                </figure>
+                <span class="print-dim print-dim--w mono" data-dim-w>29.7 cm</span>
+              </div>
             </div>
           </div>
-          <div class="print-floor" aria-hidden="true"></div>
         </div>
         <p class="mono dim print-scale-note">Sizes shown in true proportion</p>
       </div>
