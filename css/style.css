@@ -19,6 +19,7 @@
   --font-display: "Cormorant Garamond", Georgia, serif;
   --font-mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
   --font-body: "Instrument Sans", "Helvetica Neue", sans-serif;
+  --font-signature: "Mr De Haviland", "Cormorant Garamond", cursive;
   --pad: clamp(20px, 4vw, 52px);
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
   --header-bg: rgba(250,249,246,0.92);   /* light: translucent paper */
@@ -562,3 +563,45 @@ a:focus-visible, button:focus-visible, input:focus-visible, summary:focus-visibl
 .journal-entry h2 { font-family: var(--font-display); font-weight: 500; font-size: clamp(1.35rem, 2.4vw, 1.9rem); margin: 10px 0 0; }
 .journal-entry p { color: var(--mist); margin: 12px 0 0; max-width: 62ch; }
 .journal-entry .mono-link { margin-top: 14px; display: inline-block; }
+
+/* ---------------------------------------- ARTIST SIGNATURE */
+.artist-signature {
+  font-family: var(--font-signature);
+  color: var(--gilt);
+  line-height: 1;
+  display: inline-block;
+}
+/* About: μεγάλη υπογραφή στο τέλος του κειμένου */
+.sig-about { font-size: clamp(3.2rem, 7vw, 5.2rem); margin-top: 0.2em; }
+.sig-about .sig-role {
+  display: block; font-family: var(--font-mono); color: var(--mist);
+  font-size: 10.5px; letter-spacing: 0.28em; text-transform: uppercase; margin-top: 0.2em;
+}
+/* Footer: μικρότερη υπογραφή δίπλα στο brand */
+.footer-signature { font-family: var(--font-signature); color: var(--gilt); font-size: 2.6rem; line-height: 1; }
+
+/* animated "draw-in" όταν εμφανίζεται (μόνο αν δεν προτιμά reduced motion) */
+@media (prefers-reduced-motion: no-preference) {
+  .sig-about { opacity: 0; transform: translateY(8px); transition: opacity 1s var(--ease), transform 1s var(--ease); }
+  .sig-about.in { opacity: 1; transform: none; }
+}
+
+/* ---------------------------------- PHOTO CAPTIONS (portfolio) */
+.p-item { position: relative; margin: 0; }
+.p-item figcaption {
+  position: absolute; left: 0; right: 0; bottom: 0;
+  padding: 22px 18px 14px;
+  font-family: var(--font-display); font-style: italic; font-size: 1.05rem;
+  color: #f4f1ea;
+  background: linear-gradient(180deg, transparent, rgba(18,17,14,0.72));
+  opacity: 0; transform: translateY(6px);
+  transition: opacity 0.4s var(--ease), transform 0.4s var(--ease);
+  pointer-events: none;
+}
+.p-item figcaption .cap-index {
+  font-family: var(--font-mono); font-style: normal; font-size: 9.5px;
+  letter-spacing: 0.18em; text-transform: uppercase; color: var(--gilt);
+  display: block; margin-bottom: 4px;
+}
+.p-item:hover figcaption, .p-item:focus-within figcaption { opacity: 1; transform: none; }
+/* στο lightbox η λεζάντα ήδη εμφανίζεται μέσω figcaption */
