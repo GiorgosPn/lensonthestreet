@@ -118,8 +118,10 @@ a { color: inherit; }
   padding: 13px var(--pad);
 }
 .brand { display: inline-flex; align-items: center; gap: 12px; text-decoration: none; min-width: 0; }
-.brand .mark { width: 34px; height: 34px; flex: 0 0 auto; color: var(--ink); transition: transform 0.8s var(--ease), color 0.3s var(--ease); }
-.brand:hover .mark { transform: rotate(60deg); color: var(--gilt); }
+.brand .mark { width: 34px; height: 34px; flex: 0 0 auto; color: var(--ink); transition: color 0.3s var(--ease); }
+.brand:hover .mark { color: var(--gilt); }
+.brand:hover .mark-blades { animation: shutter-blades 0.7s var(--ease); }
+.brand:hover .mark-ring { animation: shutter-ring 0.7s var(--ease); }
 .brand-text { line-height: 1.15; min-width: 0; }
 .brand-text .bt-name { display: block; font-family: var(--font-display); font-size: 19px; white-space: nowrap; }
 .brand-text .bt-name em { font-style: italic; }
@@ -380,7 +382,9 @@ a.footer-brandline:hover .mark-ring { animation: shutter-ring 0.7s var(--ease); 
 }
 @media (prefers-reduced-motion: reduce) {
   a.footer-brandline:hover .mark-blades,
-  a.footer-brandline:hover .mark-ring { animation: none; }
+  a.footer-brandline:hover .mark-ring,
+  .brand:hover .mark-blades,
+  .brand:hover .mark-ring { animation: none; }
 }
 .footer-meta { display: flex; justify-content: space-between; gap: 14px; flex-wrap: wrap; padding: 16px var(--pad) 24px; border-top: 1px solid var(--line); }
 .footer-meta a { text-decoration: none; }
