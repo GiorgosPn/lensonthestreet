@@ -417,36 +417,69 @@ a:focus-visible, button:focus-visible, input:focus-visible, summary:focus-visibl
 }
 .print-stage { position: sticky; top: 90px; }
 .print-wall {
-  position: relative; border: 1px solid var(--line); background: var(--panel);
-  height: clamp(360px, 56vh, 540px);
+  position: relative; border: 1px solid var(--line);
+  height: clamp(380px, 58vh, 560px);
   overflow: hidden;
+  background: var(--panel);
+  background: linear-gradient(180deg, var(--panel) 0%, color-mix(in srgb, var(--panel) 84%, var(--paper)) 82%);
+  display: flex; align-items: flex-end; justify-content: center;
 }
+/* Σκηνή σε κλίμακα. --k = px ανά cm (το ορίζει το JS).
+   --pw/--ph = διαστάσεις του τρέχοντος print σε cm.               */
+.print-scene {
+  --k: 2;               /* fallback, το JS το αντικαθιστά */
+  --pw: 29.7; --ph: 42;
+  position: relative;
+  width: calc(160 * var(--k) * 1px);   /* πλάτος δωματίου 160cm */
+  height: calc(150 * var(--k) * 1px);  /* ύψος δωματίου 150cm   */
+  max-width: 100%;
+}
+.scene-room { position: absolute; left: 0; bottom: 0; width: 100%; height: 100%; }
+.scene-room .rm-skirt { stroke: var(--line); stroke-width: 1; }
+.scene-room .rm-ink path,
+.scene-room .rm-ink rect,
+.scene-room .rm-ink line,
+.scene-room .rm-ink ellipse { fill: none; stroke: var(--mist); stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; opacity: 0.5; }
+.scene-room .rm-accent { stroke: var(--gilt); stroke-width: 1.8; opacity: 0.8; fill: none; }
+.scene-room .rm-accent-fill { stroke: var(--gilt); stroke-width: 1.6; fill: none; fill: color-mix(in srgb, var(--gilt) 14%, transparent); opacity: 0.8; }
+
+/* κάδρο: κεντραρισμένο κάθετα στον τοίχο. Κρέμεται από κορδόνι ως την κορυφή.
+   Το κέντρο τοίχου είναι στα ROOM_H/2 = 75cm (SVG μονάδες = cm).            */
 .print-hang {
-  position: absolute; inset: 0 0 82px 0;
-  display: flex; flex-direction: column; align-items: center; justify-content: flex-end;
+  position: absolute; left: 50%; transform: translateX(-50%);
+  bottom: calc((80 - var(--ph) / 2) * var(--k) * 1px);
+  display: flex; flex-direction: column; align-items: center;
 }
-.print-cord { flex: 1 1 auto; width: 1px; background: var(--gilt); opacity: 0.65; }
+.print-cord {
+  position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%);
+  width: 1px; background: var(--gilt); opacity: 0.6;
+  height: calc((150 - (80 + var(--ph) / 2)) * var(--k) * 1px);
+}
+.print-cord::after { content: ""; position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 5px; height: 5px; border-radius: 50%; background: var(--gilt); }
 .print-frame-wrap { position: relative; flex: 0 0 auto; }
 .print-frame {
-  margin: 0; background: var(--paper); border: 1px solid var(--line);
-  box-shadow: 0 18px 40px rgba(20, 19, 15, 0.14);
-  padding: 5%; box-sizing: border-box;
-  width: 78px; height: 110px;             /* JS overrides to true scale */
-  transition: width 0.7s var(--ease), height 0.7s var(--ease);
+  margin: 0; box-sizing: border-box;
+  background: var(--paper); border: 1px solid var(--line);
+  box-shadow: 0 18px 40px rgba(20, 19, 15, 0.18);
+  padding: 5px;                                        /* λεπτή passe-partout */
+  width: calc(var(--pw) * var(--k) * 1px);
+  height: calc(var(--ph) * var(--k) * 1px);
+  transition: width 0.6s var(--ease), height 0.6s var(--ease), bottom 0.6s var(--ease);
 }
-:root[data-theme="dark"] .print-frame { background: #efede8; border-color: transparent; box-shadow: 0 18px 44px rgba(0,0,0,0.5); }
-.print-frame img { width: 100%; height: 100%; object-fit: cover; }
-.print-frame.settle { animation: settle 0.7s var(--ease); }
+:root[data-theme="dark"] .print-frame { background: #f2efe8; border-color: transparent; box-shadow: 0 20px 48px rgba(0,0,0,0.55); }
+.print-frame img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.print-frame.settle { animation: settle 0.6s var(--ease); }
 @keyframes settle { 50% { transform: translateY(-3px); } }
-.print-floor { position: absolute; left: 0; right: 0; bottom: 44px; border-bottom: 1px dashed var(--line); }
+
+/* labels ΕΞΩ από το κάδρο */
 .print-dim {
-  position: absolute; color: var(--gilt); font-size: 10.5px;
+  position: absolute; color: var(--gilt); font-size: 10.5px; letter-spacing: 0.1em;
   opacity: 0; transition: opacity 0.5s var(--ease) 0.25s; white-space: nowrap;
 }
 .print-stage.on .print-dim { opacity: 1; }
-.print-dim--w { bottom: -30px; left: 50%; transform: translateX(-50%); }
-.print-dim--w::before, .print-dim--w::after { content: ""; display: inline-block; width: 18px; height: 1px; background: var(--gilt); vertical-align: middle; margin: 0 8px; opacity: 0.6; }
-.print-dim--h { left: -12px; top: 50%; transform: translate(-100%, -50%); writing-mode: vertical-rl; rotate: 180deg; }
+.print-dim--w { top: calc(100% + 12px); left: 50%; transform: translateX(-50%); }
+.print-dim--w::before, .print-dim--w::after { content: ""; display: inline-block; width: 16px; height: 1px; background: var(--gilt); vertical-align: middle; margin: 0 8px; opacity: 0.55; }
+.print-dim--h { right: calc(100% + 12px); top: 50%; transform: translateY(-50%); writing-mode: vertical-rl; rotate: 180deg; }
 .print-scale-note { margin-top: 12px; text-align: center; display: block; }
 
 .print-panel .print-title { font-size: clamp(1.7rem, 3vw, 2.5rem); margin-top: 6px; }
