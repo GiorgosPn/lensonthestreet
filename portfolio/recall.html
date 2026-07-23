@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+  <script>(function(){try{var t=localStorage.getItem("lots-theme");if(t)document.documentElement.setAttribute("data-theme",t);}catch(e){}})();</script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Recall · Lens on the Street</title>
+
+  <!-- ΚΡΥΦΗ ΣΕΛΙΔΑ — εκτός sitemap.xml & portfolio.html -->
+  <meta name="robots" content="noindex, nofollow, noarchive, noimageindex, nosnippet">
+  <meta name="googlebot" content="noindex, nofollow">
+  <meta name="referrer" content="no-referrer">
+
+  <link rel="icon" type="image/svg+xml" href="../assets/brand/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=IBM+Plex+Mono:wght@400;500&family=Instrument+Sans:wght@400;500&family=Mr+De+Haviland&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+
+  <style>
+    /* Recall: ενιαίο grid 3 στηλών — παράκαμψη του default 2-column layout */
+    .project-gallery.grid-3 {
+      grid-template-columns: repeat(3, 1fr);
+      align-items: start;
+    }
+    .project-gallery.grid-3 .p-item:nth-child(3n + 1) {
+      grid-column: auto;
+    }
+    @media (max-width: 900px) {
+      .project-gallery.grid-3 { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 560px) {
+      .project-gallery.grid-3 { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="grain" aria-hidden="true"></div>
+  <div class="progress" aria-hidden="true"></div>
+  <div class="cursor" aria-hidden="true"></div>
+
+  <div class="loader" aria-hidden="true">
+    <span class="loader-name">Lens on the <em>Street</em></span>
+    <div class="loader-bottom">
+      <span class="mono dim loader-label">Developing</span>
+      <span class="loader-count">000</span>
+    </div>
+  </div>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="../index.html" aria-label="Lens on the Street, home">
+        <svg class="mark mark-shutter" viewBox="0 0 68 68" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle class="mark-ring" cx="34" cy="34" r="30"/>
+  <g class="mark-blades">
+  <line x1="34.00" y1="5.20" x2="48.37" y2="39.81"/>
+  <line x1="58.94" y1="19.60" x2="36.16" y2="49.35"/>
+  <line x1="58.94" y1="48.40" x2="21.79" y2="43.54"/>
+  <line x1="34.00" y1="62.80" x2="19.63" y2="28.19"/>
+  <line x1="9.06" y1="48.40" x2="31.84" y2="18.65"/>
+  <line x1="9.06" y1="19.60" x2="46.21" y2="24.46"/></g></svg>
+        <span class="brand-text">
+          <span class="bt-name">Lens on the <em>Street</em></span>
+          <span class="bt-sub">Giorgos Panagou</span>
+        </span>
+      </a>
+      <button class="theme-toggle theme-toggle--bar" data-theme-toggle aria-label="Toggle dark mode" title="Toggle theme"><svg class="ic-sun" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5 5l1.4 1.4M17.6 17.6L19 19M19 5l-1.4 1.4M6.4 17.6L5 19"/></svg><svg class="ic-moon" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M20 14.5A8 8 0 0 1 9.5 4a7 7 0 1 0 10.5 10.5z"/></svg></button><button class="nav-toggle" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
+      <nav class="site-nav" aria-label="Main">
+        <a class="nav-link" href="../portfolio.html">Portfolio</a>
+        <a class="nav-link" href="../journal.html">Journal</a>
+        <a class="nav-link" href="../about.html">About</a>
+        <a class="nav-link" href="../faqs.html">FAQs</a>
+        <a class="nav-link" href="../contact.html">Contact</a>
+        <a class="nav-link" href="../prints.html">Prints</a>
+        <div class="socials">
+          <a href="https://instagram.com/lensonthestreetcollective" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="3.8"/><circle cx="16.9" cy="7.1" r="1" fill="currentColor" stroke="none"/></svg></a>
+          <a href="https://tiktok.com/@lensonthestreet" target="_blank" rel="noopener" aria-label="TikTok"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M16.5 3c.3 1.9 1.6 3.4 3.5 3.7v3c-1.4 0-2.6-.4-3.7-1.1v6.2c0 3.4-2.6 6.2-6 6.2s-6-2.5-6-5.8c0-3.2 2.5-5.8 5.7-5.9.3 0 .6 0 .9.1v3.1a2.9 2.9 0 0 0-3.5 2.8c0 1.6 1.3 2.8 2.9 2.8s2.9-1.3 2.9-2.9V3h3.3z"/></svg></a>
+        </div>
+        <button class="theme-toggle" data-theme-toggle aria-label="Toggle dark mode" title="Toggle theme"><svg class="ic-sun" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5 5l1.4 1.4M17.6 17.6L19 19M19 5l-1.4 1.4M6.4 17.6L5 19"/></svg><svg class="ic-moon" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M20 14.5A8 8 0 0 1 9.5 4a7 7 0 1 0 10.5 10.5z"/></svg></button>
+        <span class="clock mono dim" data-clock></span>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+
+    <section class="page-hero">
+      <span class="mono dim eyebrow-rule reveal">Σε εξέλιξη</span>
+      <h1 class="display h-page reveal"><em>Recall</em></h1>
+      <p class="project-intro reveal">Μια σειρά ασπρόμαυρων πορτρέτων για τη μνήμη και την αναζήτηση της ταυτότητας. Το φως αφήνει πάντα το μισό πρόσωπο στο σκοτάδι.</p>
+      <p class="project-intro reveal">Δουλεύουμε την προσπάθεια να θυμηθείς κάτι, το να κοιτάζεις και να μην αναγνωρίζεις, και τα χέρια πάνω στο πρόσωπο — που άλλοτε το πλάθουν, άλλοτε το συγκρατούν, και δεν είναι σαφές ποιο από τα δύο.</p>
+      <p class="mono dim project-count reveal">Στούντιο · Αθήνα</p>
+    </section>
+
+    <div class="project-gallery grid-3">
+      <!-- GALLERY:START:recall -->
+
+      <figure class="p-item reveal">
+        <img src="../assets/recall/01.jpeg" alt="Recall, plate 01, by Giorgos Panagou" loading="lazy">
+        <figcaption><span class="cap-index">Recall · 01</span></figcaption>
+      </figure>
+      <figure class="p-item reveal">
+        <img src="../assets/recall/02.jpeg" alt="Recall, plate 02, by Giorgos Panagou" loading="lazy">
+        <figcaption><span class="cap-index">Recall · 02</span></figcaption>
+      </figure>
+      <figure class="p-item reveal">
+        <img src="../assets/recall/03.jpeg" alt="Recall, plate 03, by Giorgos Panagou" loading="lazy">
+        <figcaption><span class="cap-index">Recall · 03</span></figcaption>
+      </figure>
+
+      <figure class="p-item reveal">
+        <img src="../assets/recall/04.jpeg" alt="Recall, plate 04, by Giorgos Panagou" loading="lazy">
+        <figcaption><span class="cap-index">Recall · 04</span></figcaption>
+      </figure>
+      <figure class="p-item reveal">
+        <img src="../assets/recall/05.jpeg" alt="Recall, plate 05, by Giorgos Panagou" loading="lazy">
+        <figcaption><span class="cap-index">Recall · 05</span></figcaption>
+      </figure>
+      <figure class="p-item reveal">
+        <img src="../assets/recall/06.jpeg" alt="Recall, plate 06, by Giorgos Panagou" loading="lazy">
+        <figcaption><span class="cap-index">Recall · 06</span></figcaption>
+      </figure>
+
+      <figure class="p-item reveal">
+        <img src="../assets/recall/07.jpeg" alt="Recall, plate 07, by Giorgos Panagou" loading="lazy">
+        <figcaption><span class="cap-index">Recall · 07</span></figcaption>
+      </figure>
+      <figure class="p-item reveal">
+        <img src="../assets/recall/08.jpeg" alt="Recall, plate 08, by Giorgos Panagou" loading="lazy">
+        <figcaption><span class="cap-index">Recall · 08</span></figcaption>
+      </figure>
+      <figure class="p-item reveal">
+        <img src="../assets/recall/09.jpeg" alt="Recall, plate 09, by Giorgos Panagou" loading="lazy">
+        <figcaption><span class="cap-index">Recall · 09</span></figcaption>
+      </figure>
+
+      <figure class="p-item reveal">
+        <img src="../assets/recall/10.jpeg" alt="Recall, plate 10, by Giorgos Panagou" loading="lazy">
+        <figcaption><span class="cap-index">Recall · 10</span></figcaption>
+      </figure>
+      <figure class="p-item reveal">
+        <img src="../assets/recall/11.jpeg" alt="Recall, plate 11, by Giorgos Panagou" loading="lazy">
+        <figcaption><span class="cap-index">Recall · 11</span></figcaption>
+      </figure>
+      <figure class="p-item reveal">
+        <img src="../assets/recall/12.jpeg" alt="Recall, plate 12, by Giorgos Panagou" loading="lazy">
+        <figcaption><span class="cap-index">Recall · 12</span></figcaption>
+      </figure>
+
+      <!-- GALLERY:END:recall -->
+    </div>
+
+  </main>
+
+  <footer class="site-footer">
+    <a class="footer-brandline" href="../index.html" aria-label="Lens on the Street, back to home">
+      <svg class="mark mark-shutter" viewBox="0 0 68 68" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle class="mark-ring" cx="34" cy="34" r="30"/>
+  <g class="mark-blades">
+  <line x1="34.00" y1="5.20" x2="48.37" y2="39.81"/>
+  <line x1="58.94" y1="19.60" x2="36.16" y2="49.35"/>
+  <line x1="58.94" y1="48.40" x2="21.79" y2="43.54"/>
+  <line x1="34.00" y1="62.80" x2="19.63" y2="28.19"/>
+  <line x1="9.06" y1="48.40" x2="31.84" y2="18.65"/>
+  <line x1="9.06" y1="19.60" x2="46.21" y2="24.46"/></g></svg>
+      <span class="display">Lens on the Street</span>
+    </a>
+    <div class="footer-meta">
+      <span class="footer-signature" aria-label="Giorgos Panagou">Giorgos Panagou</span>
+      <span class="mono dim">© 2026 · All rights reserved</span>
+      <span class="mono dim">Photographer · Athens, GR</span>
+      <span class="mono dim"><a href="https://instagram.com/lensonthestreetcollective" target="_blank" rel="noopener">Instagram</a> / <a href="https://tiktok.com/@lensonthestreet" target="_blank" rel="noopener">TikTok</a></span>
+    </div>
+  </footer>
+
+  <div class="lightbox" hidden role="dialog" aria-label="Photo viewer">
+    <span class="lightbox-counter"></span>
+    <button class="lightbox-close" aria-label="Close">&times;</button>
+    <button class="lightbox-prev" aria-label="Previous">&larr;</button>
+    <button class="lightbox-next" aria-label="Next">&rarr;</button>
+    <figure><img alt=""><figcaption></figcaption></figure>
+  </div>
+
+  <script src="../js/main.js" defer></script>
+</body>
+</html>
