@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Sitemap: https://www.lensonthestreet.com/sitemap.xml
+Disallow: /recall.html
+Disallow: /assets/recall/
